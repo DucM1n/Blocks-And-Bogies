@@ -1,7 +1,9 @@
 {
     "parent": "create_bb:block/bogie/textures",
-    "loader": "forge:obj",
+    "loader": "porting_lib:obj",
     "flip_v": true,
+    "flipV": true,
     "model": "create_bb:models/block/bogie/large/shared/left_v_stem.obj",
-    "mtl_override": "create_bb:models/block/bogie/textures.mtl"
+    "mtl_override": "create_bb:models/block/bogie/textures.mtl",
+    "mtlOverride": "create_bb:models/block/bogie/textures.mtl"
 }

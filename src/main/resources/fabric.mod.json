@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "create_bb",
-  "version": "${version}",
+  "version": "1.0.8",
   "name": "Create: Blocks & Bogies",
   "description": "Blocks & Bogies is a Create addon that adds an abundance of different bogie styles to choose from!",
   "authors": [
@@ -27,8 +27,8 @@
     "create_bb.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=${loader_version}",
-    "minecraft": "~${minecraft_version}",
+    "fabricloader": ">=0.14.0",
+    "minecraft": "~1.20.1",
     "fabric-api": "*",
     "create": "*"
   }
