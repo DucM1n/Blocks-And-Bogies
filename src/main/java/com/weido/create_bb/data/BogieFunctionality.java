@@ -17,7 +17,6 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.network.PacketDistributor;
 
 import java.util.Random;
 
@@ -55,10 +54,7 @@ public class BogieFunctionality {
         if (level.isClientSide) return InteractionResult.SUCCESS;
 
         if (player instanceof ServerPlayer serverPlayer) {
-            BogiePackets.getChannel().send(
-                    PacketDistributor.PLAYER.with(() -> serverPlayer),
-                    new BogieMenuPacket(pos)
-            );
+            BogiePackets.sendToPlayer(serverPlayer, new BogieMenuPacket(pos));
         }
 
 

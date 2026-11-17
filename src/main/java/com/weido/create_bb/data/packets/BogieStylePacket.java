@@ -5,9 +5,10 @@ import com.simibubi.create.content.trains.bogey.AbstractBogeyBlockEntity;
 import com.simibubi.create.content.trains.bogey.BogeySizes;
 import com.simibubi.create.content.trains.bogey.BogeySizes.BogeySize;
 import com.simibubi.create.content.trains.bogey.BogeyStyle;
-import com.simibubi.create.foundation.networking.SimplePacketBase;
 import com.weido.create_bb.data.compat.steamnrails.MixinOverlapFix;
+import com.weido.create_bb.data.menu.Entry.StyleMenuHandler;
 import net.createmod.catnip.data.Pair;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -16,13 +17,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.network.NetworkEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import com.weido.create_bb.data.menu.Entry.StyleMenuHandler;
 
-public class BogieStylePacket extends SimplePacketBase {
+public class BogieStylePacket {
     private final BogeyStyle style;
     @Nullable
     private final BogeySize size;
@@ -51,7 +49,6 @@ public class BogieStylePacket extends SimplePacketBase {
         }
     }
 
-    @Override
     public void write(FriendlyByteBuf buf) {
         buf.writeResourceLocation(style.id);
         buf.writeBoolean(size != null);
@@ -64,31 +61,25 @@ public class BogieStylePacket extends SimplePacketBase {
         }
     }
 
-    @Override
-    public boolean handle(NetworkEvent.Context context) {
-        context.enqueueWork(() -> {
-            ServerPlayer player = context.getSender();
-            if (player == null) return;
-            Level level = player.level();
-            if (pos != null && level.getBlockEntity(pos) instanceof AbstractBogeyBlockEntity) {
-                Block newBlock = style.getBlockForSize(size);
-                BlockState newState = newBlock.defaultBlockState()
-                        .setValue(BlockStateProperties.HORIZONTAL_AXIS,
-                                level.getBlockState(pos).getValue(BlockStateProperties.HORIZONTAL_AXIS));
-                level.setBlock(pos, newState, 3);
-                if (level.getBlockEntity(pos) instanceof AbstractBogeyBlockEntity newBe) {
-                    newBe.setBogeyStyle(style);
-                }
+    public void handleServer(ServerPlayer player) {
+        if (player == null) return;
+        Level level = player.level();
+        if (pos != null && level.getBlockEntity(pos) instanceof AbstractBogeyBlockEntity) {
+            Block newBlock = style.getBlockForSize(size);
+            BlockState newState = newBlock.defaultBlockState()
+                    .setValue(BlockStateProperties.HORIZONTAL_AXIS,
+                            level.getBlockState(pos).getValue(BlockStateProperties.HORIZONTAL_AXIS));
+            level.setBlock(pos, newState, 3);
+            if (level.getBlockEntity(pos) instanceof AbstractBogeyBlockEntity newBe) {
+                newBe.setBogeyStyle(style);
             }
-            if (size != null) {
-                if (ModList.get().isLoaded("railways")) {
-                    MixinOverlapFix.addStyle(player.getUUID(), Pair.of(style, size));
-                }
-                else {
-                    StyleMenuHandler.addStyle(player.getUUID(), Pair.of(style, size));
-                }
+        }
+        if (size != null) {
+            if (FabricLoader.getInstance().isModLoaded("railways")) {
+                MixinOverlapFix.addStyle(player.getUUID(), Pair.of(style, size));
+            } else {
+                StyleMenuHandler.addStyle(player.getUUID(), Pair.of(style, size));
             }
-        });
-        return true;
+        }
     }
 }

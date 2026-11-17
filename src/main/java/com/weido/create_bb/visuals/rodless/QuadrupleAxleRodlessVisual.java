@@ -6,7 +6,7 @@ import com.simibubi.create.AllSpriteShifts;
 import com.simibubi.create.content.processing.burner.ScrollTransformedInstance;
 import com.simibubi.create.content.trains.bogey.BogeyVisual;
 import com.simibubi.create.foundation.render.AllInstanceTypes;
-import com.simibubi.create.foundation.render.SpecialModels;
+import com.weido.create_bb.registry.SpecialModels;
 import com.weido.create_bb.registry.BogiePartials;
 import dev.engine_room.flywheel.api.instance.Instance;
 import dev.engine_room.flywheel.api.visualization.VisualizationContext;

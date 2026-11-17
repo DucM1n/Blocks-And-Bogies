@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "create_bb",
+  "version": "${version}",
+  "name": "Create: Blocks & Bogies",
+  "description": "Blocks & Bogies is a Create addon that adds an abundance of different bogie styles to choose from!",
+  "authors": [
+    "Weido's Oddities",
+    "teacup",
+    "Matt"
+  ],
+  "contact": {
+    "homepage": "https://github.com/DucM1n/Blocks-And-Bogies",
+    "sources": "https://github.com/DucM1n/Blocks-And-Bogies"
+  },
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.weido.create_bb.BlocksBogies"
+    ],
+    "client": [
+      "com.weido.create_bb.BlocksBogiesClient"
+    ]
+  },
+  "mixins": [
+    "create_bb.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "~${minecraft_version}",
+    "fabric-api": "*",
+    "create": "*"
+  }
+}

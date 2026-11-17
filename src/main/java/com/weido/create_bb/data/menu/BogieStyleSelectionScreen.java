@@ -22,7 +22,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.fml.ModList;
+import net.fabricmc.loader.api.FabricLoader;
 import org.jetbrains.annotations.NotNull;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -95,7 +95,7 @@ public class BogieStyleSelectionScreen extends AbstractSimiScreen {
         IconButton confirmButton = new IconButton(guiLeft + background.getWidth() - 25, guiTop + background.getHeight() - 24, AllIcons.I_CONFIRM)
                 .withCallback(this::onMenuClose);
 
-        if (ModList.get().isLoaded("railways")) {
+        if (FabricLoader.getInstance().isModLoaded("railways")) {
             addRenderableWidget(com.weido.create_bb.data.compat.steamnrails.MenuSwitchButton.create(
                     guiLeft + background.getWidth() - 54,
                     guiTop + background.getHeight() - 24,

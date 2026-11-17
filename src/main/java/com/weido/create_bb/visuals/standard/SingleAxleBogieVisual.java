@@ -1,6 +1,6 @@
 package com.weido.create_bb.visuals.standard;
 
-import com.simibubi.create.foundation.render.SpecialModels;
+import com.weido.create_bb.registry.SpecialModels;
 import com.weido.create_bb.data.rotation.BlocksBogiesBogieVisual;
 import org.jetbrains.annotations.Nullable;
 import com.mojang.blaze3d.vertex.PoseStack;

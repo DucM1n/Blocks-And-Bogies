@@ -6,8 +6,6 @@
   "mixins": [
     "AbstractBogeyBlockMixin",
     "BogeyMenuScreenMixin",
-    "CarriageContraptionVisualMixin",
-    "ContraptionVisualAccessor",
     "StationBlockEntityMixin",
     "TrackBlockMixin"
   ],

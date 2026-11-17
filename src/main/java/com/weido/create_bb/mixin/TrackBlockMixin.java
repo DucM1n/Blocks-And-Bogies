@@ -12,7 +12,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.fml.ModList;
+import net.fabricmc.loader.api.FabricLoader;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -23,7 +23,7 @@ import com.weido.create_bb.data.menu.Entry.StyleMenuHandler;
 public class TrackBlockMixin {
     @Inject(method = "getBogeyAnchor", at = @At("HEAD"), cancellable = true)
     private void placeCustomStyle(BlockGetter world, BlockPos pos, BlockState state, CallbackInfoReturnable<BlockState> cir) {
-        if (!ModList.get().isLoaded("railways")) {
+        if (!FabricLoader.getInstance().isModLoaded("railways")) {
             if (StyleMenuHandler.getCurrentPlayer() == null)
                 return;
             Pair<BogeyStyle, BogeySize> styleData = StyleMenuHandler.getStyle(StyleMenuHandler.getCurrentPlayer());

@@ -1,49 +1,36 @@
 package com.weido.create_bb;
 
+import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.weido.create_bb.registry.*;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.fabricmc.api.ModInitializer;
+import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import net.minecraft.resources.ResourceLocation;
-import com.simibubi.create.foundation.data.CreateRegistrate;
 
-@Mod(BlocksBogies.MOD_ID)
-public class BlocksBogies {
+public class BlocksBogies implements ModInitializer {
     public static final String MOD_ID = "create_bb";
     public static final String MOD_NAME = "Create: Blocks & Bogies";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     public static CreateRegistrate REGISTRATE;
 
-    public BlocksBogies() {
+    @Override
+    public void onInitialize() {
         REGISTRATE = CreateRegistrate.create(MOD_ID);
-        onCtor();
-    }
-
-    public static void onCtor() {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get()
-                .getModEventBus();
-
-        REGISTRATE.registerEventListeners(modEventBus);
 
         BogieStyles.register();
         BogieBlocks.register();
-        BogiePackets.registerPackets();
         BogieBlockEntities.register();
+        BogiePackets.registerPackets();
 
-        BogiePartials.init();
+        REGISTRATE.register();
 
-        modEventBus.addListener(BlocksBogies::init);
+        LOGGER.info("{} initialized on Fabric!", MOD_NAME);
     }
 
-    public static void init(final FMLCommonSetupEvent event) {
-        LOGGER.info("{} initializing...", MOD_NAME);
-    }
     public static ResourceLocation asResource(String path) {
         return new ResourceLocation(MOD_ID, path);
     }
+
     public static CreateRegistrate registrate() {
         return REGISTRATE;
     }

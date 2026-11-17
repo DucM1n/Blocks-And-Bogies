@@ -3,7 +3,7 @@ package com.weido.create_bb.visuals.standard;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.trains.bogey.BogeyVisual;
-import com.simibubi.create.foundation.render.SpecialModels;
+import com.weido.create_bb.registry.SpecialModels;
 import com.weido.create_bb.registry.BogiePartials;
 import dev.engine_room.flywheel.api.instance.Instance;
 import dev.engine_room.flywheel.api.visualization.VisualizationContext;

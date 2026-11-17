@@ -1,6 +1,6 @@
 package com.weido.create_bb.visuals.trailing;
 
-import com.simibubi.create.foundation.render.SpecialModels;
+import com.weido.create_bb.registry.SpecialModels;
 import org.jetbrains.annotations.Nullable;
 import java.util.function.Consumer;
 import com.mojang.blaze3d.vertex.PoseStack;

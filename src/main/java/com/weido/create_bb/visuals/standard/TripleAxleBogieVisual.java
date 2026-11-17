@@ -2,7 +2,7 @@ package com.weido.create_bb.visuals.standard;
 
 import java.util.function.Consumer;
 
-import com.simibubi.create.foundation.render.SpecialModels;
+import com.weido.create_bb.registry.SpecialModels;
 import org.jetbrains.annotations.Nullable;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.AllPartialModels;

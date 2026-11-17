@@ -13,7 +13,7 @@ import dev.engine_room.flywheel.lib.model.Models;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import com.weido.create_bb.registry.BogiePartials;
-import com.simibubi.create.foundation.render.SpecialModels;
+import com.weido.create_bb.registry.SpecialModels;
 
 public class DoubleAxleTrailingVisual implements BogeyVisual {
     public DoubleAxleTrailingVisual(VisualizationContext ctx, float partialTick, boolean inContraption) { }
