@@ -19,9 +19,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(BogeyMenuScreen.class)
+@Mixin(value = BogeyMenuScreen.class)
 public abstract class BogeyMenuScreenMixin {
-    @Inject(method = "init", at = @At("TAIL"))
+    @Inject(method = {"init", "method_25426"}, at = @At("TAIL"), remap = false)
     private void create_bb$injectSwitchButton(CallbackInfo ci) {
         BogeyMenuScreen self = (BogeyMenuScreen) (Object) this;
         AbstractSimiScreenAccessor abstractSimiScreenAccessor = (AbstractSimiScreenAccessor) self;
@@ -31,17 +31,18 @@ public abstract class BogeyMenuScreenMixin {
         var background = ((BogeyMenuScreenAccessor) this).getBackground();
         var targetPos = MenuSwitchButton.getTargetPos();
 
-        if (background != null) {
-            IconButton switchButton = new IconButton(
-                    x + background.width - 62,
-                    y + background.height - 24,
-                    AllIcons.I_DICE
-            );
-            switchButton.withCallback(() -> ScreenOpener.open(new BogieStyleSelectionScreen(targetPos)));
-            switchButton.setToolTip(Component.translatable("create_bb.tooltips.switch_to_bb_menu").withStyle(s -> s.withColor(AbstractSimiWidget.HEADER_RGB.getRGB())));
+        int buttonX = x + (background != null ? background.width - 62 : 180);
+        int buttonY = y + (background != null ? background.height - 24 : 180);
 
-            JankWidgetRenderer.addRenderableWidgetReflect(self, switchButton);
-        }
+        IconButton switchButton = new IconButton(
+                buttonX,
+                buttonY,
+                AllIcons.I_DICE
+        );
+        switchButton.withCallback(() -> ScreenOpener.open(new BogieStyleSelectionScreen(targetPos)));
+        switchButton.setToolTip(Component.translatable("create_bb.tooltips.switch_to_bb_menu").withStyle(s -> s.withColor(AbstractSimiWidget.HEADER_RGB.getRGB())));
+
+        JankWidgetRenderer.addRenderableWidgetReflect(self, switchButton);
     }
 
     @Inject(method = "onMenuClose", at = @At("TAIL"), remap = false)

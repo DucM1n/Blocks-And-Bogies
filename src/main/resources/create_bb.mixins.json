@@ -5,13 +5,13 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "AbstractBogeyBlockMixin",
-    "BogeyMenuScreenMixin",
     "StationBlockEntityMixin",
     "TrackBlockMixin"
   ],
   "client": [
     "AbstractSimiScreenAccessor",
-    "BogeyMenuScreenAccessor"
+    "BogeyMenuScreenAccessor",
+    "BogeyMenuScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

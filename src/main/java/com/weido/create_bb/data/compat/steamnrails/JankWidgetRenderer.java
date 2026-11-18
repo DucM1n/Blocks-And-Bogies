@@ -9,16 +9,18 @@ import java.lang.reflect.Method;
 
 public class JankWidgetRenderer {
     public static <T extends GuiEventListener & Renderable & NarratableEntry> void addRenderableWidgetReflect(Screen screen, T widget) {
-        try {
-            Method method;
-            try {
-                method = Screen.class.getDeclaredMethod("addRenderableWidget", GuiEventListener.class);
-            } catch (NoSuchMethodException e) {
-                method = Screen.class.getDeclaredMethod("m_142416_", GuiEventListener.class);
+        String[] methodNames = new String[]{"addRenderableWidget", "method_37063", "m_142416_"};
+        for (String name : methodNames) {
+            for (Method method : Screen.class.getDeclaredMethods()) {
+                if (method.getName().equals(name)) {
+                    try {
+                        method.setAccessible(true);
+                        method.invoke(screen, widget);
+                        return;
+                    } catch (Exception ignored) {
+                    }
+                }
             }
-            method.setAccessible(true);
-            method.invoke(screen, widget);
-        } catch (Exception ignored) {
         }
     }
 }
